@@ -21,3 +21,4 @@ C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Deb
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Debug\netcoreapp3.1\MultitenancyPostgres.dll
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Debug\netcoreapp3.1\MultitenancyPostgres.pdb
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Debug\netcoreapp3.1\MultitenancyPostgres.genruntimeconfig.cache
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Dapper.dll

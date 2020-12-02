@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Dapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using MultitenancyPostgres.Models;
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,41 +21,25 @@ namespace MultitenancyPostgres.DataStore
         {
             _connectionString = configuration.GetConnectionString("HostConnection");
         }
+
+        internal System.Data.IDbConnection Connection
+        {
+            get
+            {
+                return new NpgsqlConnection(_connectionString);
+            }
+        }
+
+
+
         public async Task<IdentityResult> CreateAsync(User user, CancellationToken cancellationToken)
         {
-            using (var connection = new NpgsqlConnection(_connectionString))
+            using (IDbConnection dbConnection = Connection)
             {
-                await connection.OpenAsync(cancellationToken);
-
-                //user.Id = await connection.QuerySingleAsync<int>($@"INSERT INTO [ApplicationUser] ([UserName], [NormalizedUserName], [Email],
-                //[NormalizedEmail], [EmailConfirmed], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled])
-                //VALUES (@{nameof(User.UserName)}, @{nameof(User.NormalizedUserName)}, @{nameof(User.Email)},
-                //@{nameof(User.NormalizedEmail)}, @{nameof(User.EmailConfirmed)}, @{nameof(User.PasswordHash)},
-                //@{nameof(User.PhoneNumber)}, @{nameof(User.PhoneNumberConfirmed)}, @{nameof(User.TwoFactorEnabled)});
-                //SELECT CAST(SCOPE_IDENTITY() as int)", user);
-
-                var sql = "INSERT INTO Users(UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash," +
-                    "PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,) VALUES(@UserName, @pNormalizedUserName,@Email,@NormalizedEmail" +
-                    "@EmailConfirmed,@PasswordHash,@PhoneNumber,@PhoneNumberConfirmed,@TwoFactorEnabled)";
-                using var cmd = new NpgsqlCommand(sql, connection);
-
-                cmd.Parameters.AddWithValue("UserName", user.UserName);
-                cmd.Parameters.AddWithValue("NormalizedUserName",user.NormalizedUserName);
-                cmd.Parameters.AddWithValue("Email",user.Email);
-                cmd.Parameters.AddWithValue("NormalizedEmail",user.NormalizedEmail);
-                cmd.Parameters.AddWithValue("EmailConfirmed",user.EmailConfirmed);
-                cmd.Parameters.AddWithValue("PasswordHash",user.PasswordHash);
-                cmd.Parameters.AddWithValue("PhoneNumber",user.PhoneNumber);
-                cmd.Parameters.AddWithValue("PhoneNumberConfirmed",user.PhoneNumberConfirmed);
-                cmd.Parameters.AddWithValue("TwoFactorEnabled",user.TwoFactorEnabled);
-                cmd.Prepare();
-                cmd.ExecuteNonQuery();
-
-
-
-
+                dbConnection.Open();
+                dbConnection.Execute("INSERT INTO users (email,password,status) VALUES(@Email,@Password,@Status)", user);
+                dbConnection.Close();
             }
-
             return IdentityResult.Success;
         }
 
@@ -88,9 +74,13 @@ namespace MultitenancyPostgres.DataStore
             throw new NotImplementedException();
         }
 
-        public Task<User> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
+        public async Task<User> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                return dbConnection.Query<User>("SELECT * FROM customer WHERE email = @Email", new { Email = normalizedEmail }).FirstOrDefault();
+            }
         }
 
         public Task<User> FindByIdAsync(string userId, CancellationToken cancellationToken)
