@@ -16,6 +16,8 @@ namespace MultitenancyPostgres.Models
 
         public string Password{ get; set; }
 
-      
+        public string Name { get; set; }
+
+
     }
 }

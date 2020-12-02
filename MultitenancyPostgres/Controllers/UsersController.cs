@@ -36,6 +36,14 @@ namespace MultitenancyPostgres.Controllers
             }
         }
 
+        internal System.Data.IDbConnection Connection1
+        {
+            get
+            {
+                return new NpgsqlConnection("Server = localhost; Port = 5432; User Id = postgres; Password = 123");
+            }
+        }
+
         [HttpPost("add_user")]
         [Route("add_user")]
         public async Task<IActionResult> AddUser(User user)
@@ -62,15 +70,75 @@ namespace MultitenancyPostgres.Controllers
             {
                 dbConnection.Open();
                 var Users =  dbConnection.Query<User>("SELECT * FROM users");
-
-
                 return Ok(Users);
             }
+        }
+
+
+        [HttpPut("deactivate_user")]
+        [Route("deactivate_user")]
+        public async Task<IActionResult> Updateser(User user)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                dbConnection.Query("UPDATE users SET status = @Status,  password  = @Password, email= @Email WHERE id = @Id", user);
+                dbConnection.Close();
+
+                return Ok() ;
+            }
+        }
+
+        [HttpPut("create_database")]
+        [Route("create_database")]
+        public async Task<IActionResult> CreateDatabase(User user)
+        {
+
+            using (IDbConnection dbConnection = Connection1)
+            {
+                dbConnection.Open();
+                dbConnection.Execute("CREATE DATABASE "+user.Name+" WITH OWNER = postgres ENCODING = 'UTF8'");
+                dbConnection.Close();
+            }
+
+            //string connStr = "Server=localhost;Port=5432;User Id=postgres;Password=123;";
+            //var m_conn = new NpgsqlConnection(connStr);
+
+            //var m_createdb_cmd = new NpgsqlCommand("CREATE DATABASE "+ user.Email+" WITH OWNER = postgres ENCODING = 'UTF8' CONNECTION LIMIT = -1;", m_conn);
+
+            //m_conn.Open();
+            //m_createdb_cmd.ExecuteNonQuery();
+            //m_conn.Close();
 
 
 
 
-          
+            var cs = $"host=127.0.0.1;port=5432;database={user.Name};user id=postgres;password=123";
+
+            using var con = new NpgsqlConnection(cs);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand();
+            cmd.Connection = con;
+
+
+            cmd.CommandText = @"create table users (
+                            id SERIAL Primary Key,
+                            email VARCHAR(100) NOT NULL,
+                            password VARCHAR (100) NOT NULL,
+                            status VARCHAR(100)  DEFAULT 0
+                            );
+
+                            create table roles(
+                            id SERIAL Primary Key,
+                            name VARCHAR(100) NOT NULL
+                            );";
+
+            cmd.ExecuteNonQuery();
+
+            con.Dispose();
+            con.Close();
+            return Ok();
         }
     }
 }
