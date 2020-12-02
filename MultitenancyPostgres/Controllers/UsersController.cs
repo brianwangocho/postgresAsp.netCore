@@ -40,7 +40,7 @@ namespace MultitenancyPostgres.Controllers
                 //SELECT CAST(SCOPE_IDENTITY() as int)", user);
 
                 var sql = "INSERT INTO Users(UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash," +
-                    "PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,) VALUES(@UserName, @NormalizedUserName,@Email,@NormalizedEmail" +
+                    "PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,) VALUES(@UserName, @pNormalizedUserName,@Email,@NormalizedEmail" +
                     "@EmailConfirmed,@PasswordHash,@PhoneNumber,@PhoneNumberConfirmed,@TwoFactorEnabled)";
                 using var cmd = new NpgsqlCommand(sql, connection);
 
