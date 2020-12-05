@@ -73,6 +73,7 @@ namespace MultitenancyPostgres.DataLayer
                 {
                 permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
                 permClaims.Add(new Claim("valid", "1"));
+                permClaims.Add(new Claim(ClaimTypes.Role, "officer"));
                 permClaims.Add(new Claim("userid", user.Id.ToString()));
                 var token = new JwtSecurityToken(issuer, //Issure    
                     issuer,  //Audience    

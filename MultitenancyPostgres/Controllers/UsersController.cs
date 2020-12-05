@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -85,6 +86,7 @@ namespace MultitenancyPostgres.Controllers
 
         [HttpGet("get_user")]
         [Route("get_user")]
+        [Authorize(Roles = "officer")]
         public async Task<IActionResult> GetUser()
         {
             using (IDbConnection dbConnection = Connection)
