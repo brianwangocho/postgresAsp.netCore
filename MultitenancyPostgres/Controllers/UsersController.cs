@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using MultitenancyPostgres.DataLayer;
 using MultitenancyPostgres.Models;
 using Npgsql;
 using System;
@@ -20,11 +21,12 @@ namespace MultitenancyPostgres.Controllers
         //https://stackoverflow.com/questions/650098/how-to-execute-an-sql-script-file-using-c-sharp
 
         private readonly string _connectionString;
-
+      
 
         public UsersController(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("HostConnection");
+            
 
         }
 
@@ -48,19 +50,38 @@ namespace MultitenancyPostgres.Controllers
         [Route("add_user")]
         public async Task<IActionResult> AddUser(User user)
         {
-            using (IDbConnection dbConnection = Connection)
-            {
-                dbConnection.Open();
-                dbConnection.Execute("INSERT INTO users (email,password,status) VALUES(@Email,@Password,@Status)", user);
-                dbConnection.Close();
-            }
+            //using (IDbConnection dbConnection = Connection)
+            //{
+            //    dbConnection.Open();
+            //    dbConnection.Execute("INSERT INTO users (email,password,status) VALUES(@Email,@Password,@Status)", user);
+            //    dbConnection.Close();
+            //}
 
-
-
+            UserRepository useRepository = new UserRepository("isuzu");
+            useRepository.AddUser(user);
 
 
             return Ok();
         }
+
+        [HttpPost("login_user")]
+        [Route("login_user")]
+        public async Task<IActionResult> LoginUser(LoginRequest user)
+        {
+            //using (IDbConnection dbConnection = Connection)
+            //{
+            //    dbConnection.Open();
+            //    dbConnection.Execute("INSERT INTO users (email,password,status) VALUES(@Email,@Password,@Status)", user);
+            //    dbConnection.Close();
+            //}
+
+            UserRepository useRepository = new UserRepository("isuzu");
+           var result = useRepository.LoginUser(user);
+
+
+            return Ok(result.Result);
+        }
+
 
         [HttpGet("get_user")]
         [Route("get_user")]
@@ -101,17 +122,7 @@ namespace MultitenancyPostgres.Controllers
                 dbConnection.Close();
             }
 
-            //string connStr = "Server=localhost;Port=5432;User Id=postgres;Password=123;";
-            //var m_conn = new NpgsqlConnection(connStr);
-
-            //var m_createdb_cmd = new NpgsqlCommand("CREATE DATABASE "+ user.Email+" WITH OWNER = postgres ENCODING = 'UTF8' CONNECTION LIMIT = -1;", m_conn);
-
-            //m_conn.Open();
-            //m_createdb_cmd.ExecuteNonQuery();
-            //m_conn.Close();
-
-
-
+       
 
             var cs = $"host=127.0.0.1;port=5432;database={user.Name};user id=postgres;password=123";
 

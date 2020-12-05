@@ -7,7 +7,6 @@ C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Deb
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\MultitenancyPostgres.dll
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\MultitenancyPostgres.pdb
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Npgsql.dll
-C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\System.Runtime.InteropServices.PInvoke.dll
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Debug\netcoreapp3.1\MultitenancyPostgres.csprojAssemblyReference.cache
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Debug\netcoreapp3.1\MultitenancyPostgres.AssemblyInfoInputs.cache
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Debug\netcoreapp3.1\MultitenancyPostgres.AssemblyInfo.cs
@@ -22,3 +21,12 @@ C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Deb
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Debug\netcoreapp3.1\MultitenancyPostgres.pdb
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\obj\Debug\netcoreapp3.1\MultitenancyPostgres.genruntimeconfig.cache
 C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Dapper.dll
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\BCrypt.Net-Next.dll
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\wangocho\source\repos\MultitenancyPostgres\MultitenancyPostgres\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
