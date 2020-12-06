@@ -14,6 +14,8 @@ namespace MultitenancyPostgres.DataLayer
     {
         public void AddTenant(Tenant tenant);
 
+        public void UpdateTenant(Tenant tenant);
+
         public Task<Tenant> FindTenantById(int Id);
 
         public Task<Tenant> FindTenantByName(string Name);
@@ -103,6 +105,18 @@ namespace MultitenancyPostgres.DataLayer
             }
 
             return false;
+        }
+
+        public void UpdateTenant(Tenant tenant)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                dbConnection.Query("UPDATE tenats SET status = @Status,name = @Name,DatabaseCreated= @DatabaseCreated WHERE id = @Id",tenant);
+                dbConnection.Close();
+
+              
+            }
         }
     }
 }
