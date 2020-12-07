@@ -1,32 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\wangocho\\source\\repos\\MultitenancyPostgres\\MultitenancyPostgres\\MultitenancyPostgres.csproj": {}
+    "C:\\Users\\Ngenx\\Desktop\\postgresAsp.netCore\\MultitenancyPostgres\\MultitenancyPostgres.csproj": {}
   },
   "projects": {
-    "C:\\Users\\wangocho\\source\\repos\\MultitenancyPostgres\\MultitenancyPostgres\\MultitenancyPostgres.csproj": {
+    "C:\\Users\\Ngenx\\Desktop\\postgresAsp.netCore\\MultitenancyPostgres\\MultitenancyPostgres.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wangocho\\source\\repos\\MultitenancyPostgres\\MultitenancyPostgres\\MultitenancyPostgres.csproj",
+        "projectUniqueName": "C:\\Users\\Ngenx\\Desktop\\postgresAsp.netCore\\MultitenancyPostgres\\MultitenancyPostgres.csproj",
         "projectName": "MultitenancyPostgres",
-        "projectPath": "C:\\Users\\wangocho\\source\\repos\\MultitenancyPostgres\\MultitenancyPostgres\\MultitenancyPostgres.csproj",
-        "packagesPath": "C:\\Users\\wangocho\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wangocho\\source\\repos\\MultitenancyPostgres\\MultitenancyPostgres\\obj\\",
+        "projectPath": "C:\\Users\\Ngenx\\Desktop\\postgresAsp.netCore\\MultitenancyPostgres\\MultitenancyPostgres.csproj",
+        "packagesPath": "C:\\Users\\Ngenx\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ngenx\\Desktop\\postgresAsp.netCore\\MultitenancyPostgres\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\wangocho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ngenx\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +39,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "BCrypt.Net-Next": {
               "target": "Package",
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
