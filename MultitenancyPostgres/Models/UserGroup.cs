@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MultitenancyPostgres.Models
 {
-    public class Department
+    public class UserGroup
     {
-        [Key]
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public int BranchId { get; set; } ///Foreign Key
+        public string Status { get; set; }
 
-       
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+
+        public DateTime ModifiedOn { get; set; } = DateTime.Now;
     }
 }

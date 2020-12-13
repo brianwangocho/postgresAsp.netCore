@@ -18,6 +18,7 @@ namespace MultitenancyPostgres.Models
 
         public string Name { get; set; }
 
+        public ICollection<UserGroup> userGroups { get; set; } = new HashSet<UserGroup>();
 
     }
 }

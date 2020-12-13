@@ -71,9 +71,15 @@ namespace MultitenancyPostgres.DataLayer
                 }
                 else if (BCrypt.Net.BCrypt.Verify(loginRequest.Password, user.Password))
                 {
+                PermissionRepository permissionRepository = new PermissionRepository(connectionString);
+             var permissions =    permissionRepository.userPermission(user.Id);
                 permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
                 permClaims.Add(new Claim("valid", "1"));
-                permClaims.Add(new Claim(ClaimTypes.Role, "officer"));
+                permClaims.Add(new Claim(ClaimTypes.Role, "test"));
+                permissions.ForEach(a =>
+                {
+                    permClaims.Add(new Claim(ClaimTypes.Role,a));
+                });
                 permClaims.Add(new Claim("userid", user.Id.ToString()));
                 var token = new JwtSecurityToken(issuer, //Issure    
                     issuer,  //Audience    

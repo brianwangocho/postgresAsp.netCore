@@ -83,10 +83,14 @@ namespace MultitenancyPostgres.Controllers
             return Ok(result.Result);
         }
 
+        /// <summary>
+        /// pass = 12345
+        /// </summary>
+        /// <returns></returns>
 
-        [HttpGet("get_user")]
+        [HttpGet()]
         [Route("get_user")]
-        [Authorize(Roles = "officer")]
+        [Authorize(Roles = "can_read_user")]
         public async Task<IActionResult> GetUser()
         {
             using (IDbConnection dbConnection = Connection)
@@ -96,7 +100,18 @@ namespace MultitenancyPostgres.Controllers
                 return Ok(Users);
             }
         }
-
+        [HttpGet()]
+        [Route("delete_user")]
+        [Authorize(Roles = "can_edit_department")]
+        public async Task<IActionResult>DeleteUser()
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                var Users = dbConnection.Query<User>("SELECT * FROM users");
+                return Ok(Users);
+            }
+        }
 
         [HttpPut("deactivate_user")]
         [Route("deactivate_user")]
@@ -113,6 +128,7 @@ namespace MultitenancyPostgres.Controllers
         }
 
         [HttpPut("create_database")]
+      
         [Route("create_database")]
         public async Task<IActionResult> CreateDatabase(User user)
         {

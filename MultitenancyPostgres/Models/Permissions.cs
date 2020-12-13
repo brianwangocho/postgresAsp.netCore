@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MultitenancyPostgres.Models
 {
-    public class Department
+    public class Permissions
     {
-        [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Module { get; set; }
 
-        public int BranchId { get; set; } ///Foreign Key
+        public string Permission { get; set; }
 
-       
+        public string Status { get; set; }
     }
 }
