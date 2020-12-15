@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 
 namespace MultitenancyPostgres.Models
 {
-    public class UserRoles
+    public class Roles
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-       
+
+        public string Status { get; set; }
+
     }
 }

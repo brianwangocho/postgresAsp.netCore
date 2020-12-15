@@ -1,4 +1,5 @@
-﻿using MultitenancyPostgres.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using MultitenancyPostgres.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,9 @@ namespace MultitenancyPostgres.DataLayer
         Task<LoginResponse> LoginUser(LoginRequest loginRequest);
 
         public void  AddUser(User user);
+
+        public Task<List<User>> GetUser();
+
+
     }
 }

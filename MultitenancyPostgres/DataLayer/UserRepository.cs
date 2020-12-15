@@ -46,6 +46,22 @@ namespace MultitenancyPostgres.DataLayer
             }
         }
 
+        public async Task<List<User>> GetUser()
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                var Users = dbConnection.QueryAsync<User, Roles, User>("SELECT a.id,a.email,a.status,a.roleid as Id ,b.status,b.name FROM users a INNER JOIN roles b on a.roleid = b.id ",
+                    (user, role) => {
+                        user.Roles = role;
+
+                        return user;
+
+                    }, splitOn: "Id").Result;
+                return (List<User>)Users;
+            }
+        }
+
         public async Task<LoginResponse> LoginUser(LoginRequest loginRequest)
         {
 

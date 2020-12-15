@@ -90,15 +90,12 @@ namespace MultitenancyPostgres.Controllers
 
         [HttpGet()]
         [Route("get_user")]
-        [Authorize(Roles = "can_read_user")]
         public async Task<IActionResult> GetUser()
         {
-            using (IDbConnection dbConnection = Connection)
-            {
-                dbConnection.Open();
-                var Users =  dbConnection.Query<User>("SELECT * FROM users");
-                return Ok(Users);
-            }
+            UserRepository useRepository = new UserRepository("isuzu");
+            var result = useRepository.GetUser();
+
+            return Ok(result.Result);
         }
         [HttpGet()]
         [Route("delete_user")]
@@ -108,7 +105,13 @@ namespace MultitenancyPostgres.Controllers
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                var Users = dbConnection.Query<User>("SELECT * FROM users");
+                var Users = dbConnection.QueryAsync<User,Roles,User>("SELECT a FROM users a left join roles b on a.roleid = b.id ",
+                    (user,role)=> {
+                        user.Roles = role;
+
+                        return user;
+                    
+                    },splitOn:"");
                 return Ok(Users);
             }
         }
