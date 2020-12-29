@@ -37,7 +37,7 @@ namespace MultitenancyPostgres.DataStore
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                dbConnection.Execute("INSERT INTO users (email,password,status) VALUES(@Email,@Password,@Status)", user);
+                await dbConnection.ExecuteAsync("INSERT INTO users (email,password,status) VALUES(@Email,@Password,@Status)", user);
                 dbConnection.Close();
             }
             return IdentityResult.Success;

@@ -33,6 +33,7 @@ namespace MultitenancyPostgres
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
             services.AddTransient<IUserStore<User>, UserStore>();
 
             services.AddAuthentication(auth =>
@@ -72,6 +73,11 @@ namespace MultitenancyPostgres
             app.UseAuthentication();
 
             app.UseRouting();
+
+            app.UseCors(builder =>
+                builder.WithOrigins("*")
+                .AllowAnyHeader()
+             );
 
             app.UseAuthorization();
 
