@@ -40,5 +40,19 @@ namespace MultitenancyPostgres.Controllers
 
             return Ok(memoRepository.Memos());
         }
+
+        [HttpGet()]
+        [Route("get_memo_details/{id}")]
+        public async  Task<IActionResult> MemoDetails(int id)
+        {
+            var response = await memoService.GetMemoDetails(id);
+            if (response.Status == "01")
+            {
+                return StatusCode(500, response);
+            }
+
+            return Ok(response);
+
+        }
     }
 }

@@ -17,6 +17,9 @@ namespace MultitenancyPostgres.DataLayer
         public Task UpdateMemo(Memo memo);
 
 
+        public Task<Memo> FindById(int id);
+
+
         public List<Memo> Memos();
     }
 
@@ -50,12 +53,28 @@ namespace MultitenancyPostgres.DataLayer
             }
         }
 
+        public async Task<Memo> FindById(int id)
+        {
+            Memo memo = new Memo();
+            using (IDbConnection dbConnection = Connection)
+            {
+                dbConnection.Open();
+                var data = dbConnection.Query<Memo>("SELECT * FROM memo  WHERE id = @Id", new { Id = id }).FirstOrDefault();
+                dbConnection.Close();
+
+                memo = data;
+
+            }
+
+            return memo;
+        }
+
         public List<Memo> Memos()
         {
             using (IDbConnection dbConnection = Connection)
             {
                 dbConnection.Open();
-                var data = dbConnection.Query<Memo>("SELECT * FROM memo ORDER BY createdon DESC ");
+                var data = dbConnection.Query<Memo>("SELECT * FROM memo ORDER BY createdon  DESC ");
                 dbConnection.Close();
 
                 return data.ToList();
@@ -65,7 +84,7 @@ namespace MultitenancyPostgres.DataLayer
 
         public Task UpdateMemo(Memo memo)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }
